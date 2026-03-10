@@ -14,7 +14,7 @@ class Ventana(tk.Tk):
         self.geometry("1100x500")
         self.protocol("WM_DELETE_WINDOW", self.cierre)
 
-        self.ruta_imagen = "Modulo_03/img/cameraman.png"
+        self.ruta_imagen = "img/tornillos.jpg"
 
         self.imagen = cv2.imread(self.ruta_imagen)
         self.h, self.w = self.imagen.shape[0:2]
@@ -109,7 +109,19 @@ class Procesador:
     
     @staticmethod
     def correccion_gamma(imagen, gamma):
-       
+        """
+        ¿Qué hace gamma visualmente?
+        γ < 1
+        Aclara sombras
+        Expande tonos oscuros
+        Comprime altas luces
+        Muy útil para imágenes oscuras.
+        γ > 1
+        Oscurece sombras
+        Expande altas luces
+        Comprime tonos bajos
+        Útil para imágenes muy brillantes.
+        """
         return np.clip(((imagen.astype(np.float32)*1/255)**(gamma))*255, 0, 255).astype(np.uint8)
     
     @staticmethod
